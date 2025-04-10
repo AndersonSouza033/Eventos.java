@@ -22,7 +22,8 @@ public class SistemaEventos {
             System.out.println("\n--- Bem-vindo ao Rolézinho Eventos ---");
             System.out.println("1. Entrar como Organizador");
             System.out.println("2. Entrar como Participante");
-            System.out.println("3. Sair");
+            System.out.println("3. Cadastrar participante");
+            System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -35,6 +36,8 @@ public class SistemaEventos {
                     if (loginParticipante()) menuParticipante();
                     break;
                 case 3:
+                    criarParticipante();
+                case 4:
                     System.exit(0);
                 default:
                     System.out.println("Opção inválida.");
@@ -122,17 +125,15 @@ public class SistemaEventos {
         while (true) {
             System.out.println("\n--- Menu Participante ---");
             //  ATENÇÃO MUNDANÇAS = Trocar para outro método de se inscrever no evento!
-            System.out.println("1. Cadastrar como participante"); 
-            System.out.println("2. Ver eventos disponíveis");
-            System.out.println("3. Voltar ao menu principal");
+            System.out.println("1. Ver eventos disponíveis");
+            System.out.println("2. Voltar ao menu principal");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcao) {
-                case 1: criarParticipante(); break;
-                case 2: listarEventos(); break;
-                case 3: return;
+                case 1: listarEventos(); break;
+                case 2: return;
                 default: System.out.println("Opção inválida.");
             }
         }
@@ -290,5 +291,5 @@ public class SistemaEventos {
     }
     public static List<Participante> getParticipantes() {
         return participantes;
-    }                                                                                                                         // The constructor Participantes(String ,String, String, int, LocalDate) is undefined                                                                                     
+    }                                                                        
 }
