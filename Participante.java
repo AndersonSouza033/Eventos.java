@@ -22,7 +22,7 @@ public class Participante {
     }
 
     // Criando Getters (Ler)!
-    public String getSenhap(){
+    public String getSenha(){
         return senhaParticipante;
     }
     
