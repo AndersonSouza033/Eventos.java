@@ -22,7 +22,7 @@ public class SistemaEventos {
             System.out.println("\n--- Bem-vindo ao Rolézinho Eventos ---");
             System.out.println("1. Entrar como Organizador");
             System.out.println("2. Entrar como Participante");
-            System.out.println("3. Cadastrar participante");
+            System.out.println("3. Cadastrar Participante");
             System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
