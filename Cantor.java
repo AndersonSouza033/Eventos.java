@@ -1,10 +1,10 @@
 // Definindo meus atributos da classe dos cantores!
 public class Cantor{
-    public String nomeCantor;
-    public String emailCantor;
-    public String idadeCantor;
-    public String telefoneCantor;
-    public boolean ativoCantor;
+    private String nomeCantor;
+    private String emailCantor;
+    private String idadeCantor;
+    private String telefoneCantor;
+    private boolean ativoCantor;
     
     public Cantor(String nomeCantor, String emailCantor, String idadeCantor, String telefoneCantor, boolean ativoCantor){
         this.nomeCantor = nomeCantor;
@@ -16,11 +16,10 @@ public class Cantor{
     @Override
     public String toString() {
         return "Nome: " + nomeCantor +
-               "\nE-mail: " + emailCantor +
-               "\nIdade: " + idadeCantor +
-               "\nTelefone: " + telefoneCantor +
-               "\nAtivo: " + ativoCantor ;
-               
+            "\nE-mail: " + emailCantor +
+            "\nIdade: " + idadeCantor +
+            "\nTelefone: " + telefoneCantor +
+            "\nAtivo: " + ativoCantor ;       
     }
 }
 
