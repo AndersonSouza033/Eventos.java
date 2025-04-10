@@ -12,7 +12,7 @@ public class Participante {
 
     // Construtor do participante!
     public Participante(String nomeParticipante, String emailParticipante, String senhaParticipante,
-                        String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante) {
+        String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante) {
         this.nomeParticipante = nomeParticipante;
         this.emailParticipante = emailParticipante;
         this.senhaParticipante = senhaParticipante;
@@ -22,6 +22,10 @@ public class Participante {
     }
 
     // Criando Getters (Ler)!
+    public String getSenhap(){
+        return senhaParticipante;
+    }
+    
     public String getEmail() {
         return emailParticipante;
     }
@@ -34,9 +38,9 @@ public class Participante {
     @Override
     public String toString() {
         return "Nome: " + nomeParticipante +
-               "\nE-mail: " + emailParticipante +
-               "\nTelefone: " + telefoneParticipante +
-               "\nIdade: " + idadeParticipante +
-               "\nData de Nascimento: " + nascimentoParticipante;
+            "\nE-mail: " + emailParticipante +
+            "\nTelefone: " + telefoneParticipante +
+            "\nIdade: " + idadeParticipante +
+            "\nData de Nascimento: " + nascimentoParticipante;
     }
 }
