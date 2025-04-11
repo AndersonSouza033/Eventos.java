@@ -15,9 +15,8 @@ public class SistemaEventos {
     
     // Iniciando o programa!
     public static void main(String[] args) {
-        prepararParticipantesTeste(); // Chamando o método para adicionar 1 cadastro na tabela Participante para efetuar o login!
+        prepararParticipantesTeste(); // Chamando o método teste para adicionar 1 cadastro na tabela Participante para efetuar o login!
         // Criando o menu principal!
-        // ATENÇÃO MUNDANÇAS = Adicionar a opção de se cadastrar como participante!
         while (true) {
             System.out.println("\n--- Bem-vindo ao Rolézinho Eventos ---");
             System.out.println("1. Entrar como Organizador");
@@ -36,7 +35,7 @@ public class SistemaEventos {
                     if (loginParticipante()) menuParticipante();
                     break;
                 case 3:
-                    criarParticipante();
+                    criarParticipante(); break;
                 case 4:
                     System.exit(0);
                 default:
@@ -68,10 +67,11 @@ public class SistemaEventos {
 
     // Teste de login (Método para adicionar um cadastro teste na tabela participantes)!
     public static void prepararParticipantesTeste() {
-        participantes.add(new Participante("Anderson", "andersonsouzapcb@gmail.com", "1234","9999-9999", 20, LocalDate.of(2004, 1, 1)));
+        participantes.add(new Participante("Anderson", "andersonsouzapcb@gmail.com", "1234","9999-9999", 20, LocalDate.of(2004, 1, 1), new ArrayList<Evento>()));
     }   
 
     // Criando o método de login do participante!
+    // ATENÇÂO --> Testar esse novo login se está funcionando corretamente!
     public static boolean loginParticipante(){
         System.out.println("\n--- Login Participante ---");
         
@@ -93,6 +93,7 @@ public class SistemaEventos {
     }
 
     // Criando o método do menu do organizador!
+    // ATENÇÂO MUDANÇAS --> Organizar melhor as opções pois precisar adicionar mais métodos para a classe Cantor e Participante!
     public static void menuOrganizador(){
         while (true) {
             System.out.println("\n--- Menu Organizador ---");
@@ -124,7 +125,8 @@ public class SistemaEventos {
     private static void menuParticipante() {
         while (true) {
             System.out.println("\n--- Menu Participante ---");
-            //  ATENÇÃO MUNDANÇAS = Trocar para outro método de se inscrever no evento!
+            // ATENÇÃO MUDANÇAS = Adicionar o método para se inscrever nos eventos!
+            // ATENÇÃO MUDANÇAS = Adicionar o método para editar participante!
             System.out.println("1. Ver eventos disponíveis");
             System.out.println("2. Voltar ao menu principal");
             System.out.print("Escolha uma opção: ");
@@ -256,40 +258,76 @@ public class SistemaEventos {
     }
     
     // Método para criar o participante!
-    private static void criarParticipante() {
-        System.out.println("Preencha os dados do participante!");
+private static void criarParticipante() {
+    if (eventos.isEmpty()) {
+        System.out.println("Nenhum evento disponível para cadastro.");
+        return;
+    }
 
-        System.out.print("Nome: ");
-        String nomeParticipante = scanner.nextLine();
+    System.out.println("Preencha os dados do participante!");
 
-        System.out.print("E-mail: ");
-        String emailParticipante = scanner.nextLine();
+    System.out.print("Nome: ");
+    String nomeParticipante = scanner.nextLine();
 
-        System.out.print("Senha: ");
-        String senhaParticipante = scanner.nextLine();
+    System.out.print("E-mail: ");
+    String emailParticipante = scanner.nextLine();
 
-        System.out.print("Telefone: ");
-        String telefoneParticipante = scanner.nextLine();
+    System.out.print("Senha: ");
+    String senhaParticipante = scanner.nextLine();
 
-        System.out.print("Idade: ");
-        int idadeParticipante = scanner.nextInt();
+    System.out.print("Telefone: ");
+    String telefoneParticipante = scanner.nextLine();
+
+    System.out.print("Idade: ");
+    int idadeParticipante = scanner.nextInt();
+    scanner.nextLine();
+
+    System.out.print("Data de nascimento (dd/mm/aaaa): ");
+    String dataTexto = scanner.nextLine();
+
+    LocalDate nascimentoParticipante;
+    try {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        nascimentoParticipante = LocalDate.parse(dataTexto, formatter);
+    } catch (DateTimeParseException e) {
+        System.out.println("Data inválida. Use o formato dd/mm/aaaa.");
+        return;
+    }
+
+    List<Evento> eventosEscolhidos = new ArrayList<>();
+
+    System.out.println("Deseja se inscrever em algum evento/show? (SIM/NAO)");
+    String resposta = scanner.nextLine();
+
+    while (resposta.equalsIgnoreCase("sim")) {
+        System.out.println("\nEventos disponíveis:");
+        for (int i = 0; i < eventos.size(); i++) {
+            System.out.println((i + 1) + ". " + eventos.get(i).getNome());
+        }
+
+        System.out.print("Digite o número do evento para se inscrever: ");
+        int escolhaEvento = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Data de nascimento (dd/mm/aaaa): ");
-        // Convertendo a data de nascimento em LocalDate e fazendo o catch!
-        try {
-            String dataTexto = scanner.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate nascimentoParticipante = LocalDate.parse(dataTexto, formatter);
-            // Adicionando o participantes a tabela Participante!
-            Participante participante = new Participante(nomeParticipante, emailParticipante, senhaParticipante, telefoneParticipante, idadeParticipante, nascimentoParticipante);
-            participantes.add(participante);
-            System.out.println("Participante cadastrado com sucesso!");
-        } catch (DateTimeParseException e) {
-            System.out.println("Data inválida. Use o formato dd/mm/aaaa.");
+        if (escolhaEvento < 1 || escolhaEvento > eventos.size()) {
+            System.out.println("Evento inválido.");
+        } else {
+            Evento evento = eventos.get(escolhaEvento - 1);
+            if (eventosEscolhidos.contains(evento)) {
+                System.out.println("Você já se inscreveu neste evento.");
+            } else {
+                eventosEscolhidos.add(evento);
+                System.out.println("Inscrição realizada com sucesso!");
+            }
         }
+
+        System.out.println("Deseja se inscrever em outro evento? (SIM/NAO)");
+        resposta = scanner.nextLine();
     }
-    public static List<Participante> getParticipantes() {
-        return participantes;
-    }                                                                        
+
+    Participante participante = new Participante(nomeParticipante, emailParticipante, senhaParticipante, telefoneParticipante, idadeParticipante, nascimentoParticipante, eventosEscolhidos);
+
+    participantes.add(participante);
+    System.out.println("Participante cadastrado com sucesso!");
+}                                                                      
 }
