@@ -7,7 +7,8 @@ public class Evento {
     private String localEvento;
     private int capacidadeEvento;
     private boolean ativoEvento;
-    
+
+    // Criando método construtor!
     public Evento(String nomeEvento, String codigoEvento, String descricaoEvento, String dataEvento, String localEvento, int capacidadeEvento, boolean ativoEvento) {
         this.nomeEvento = nomeEvento;
         this.codigoEvento = codigoEvento;
@@ -16,6 +17,11 @@ public class Evento {
         this.localEvento = localEvento;
         this.capacidadeEvento = capacidadeEvento;
         this.ativoEvento = true;
+    }
+    
+    // Criando Getters (Ler)!
+    public String getNome(){
+        return nomeEvento;
     }
     
     // Método para editar o evento!
