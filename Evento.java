@@ -25,7 +25,7 @@ public class Evento {
     }
     
     // Método para editar o evento!
-    public void editar(String nomeEvento, String codigoEvento, String descricaoEvento, String dataEvento, String localEvento, int capacidadeEvento) {
+    public void editarEvento(String nomeEvento, String codigoEvento, String descricaoEvento, String dataEvento, String localEvento, int capacidadeEvento) {
         this.nomeEvento = nomeEvento;
         this.codigoEvento = codigoEvento;
         this.descricaoEvento = descricaoEvento;
