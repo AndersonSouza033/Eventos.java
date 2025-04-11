@@ -1,5 +1,6 @@
 // Importando as bibliotecas necessárias!
 import java.time.LocalDate;
+import java.util.List;
 
 // Definindo meus atributos da classe dos participantes!
 public class Participante {
@@ -9,20 +10,22 @@ public class Participante {
     private String telefoneParticipante;
     private int idadeParticipante;
     private LocalDate nascimentoParticipante;
+    private List<Evento> eventoEscolhido;
 
     // Construtor do participante!
     public Participante(String nomeParticipante, String emailParticipante, String senhaParticipante,
-        String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante) {
+        String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante, List<Evento> eventoEscolhido) {
         this.nomeParticipante = nomeParticipante;
         this.emailParticipante = emailParticipante;
         this.senhaParticipante = senhaParticipante;
         this.telefoneParticipante = telefoneParticipante;
         this.idadeParticipante = idadeParticipante;
         this.nascimentoParticipante = nascimentoParticipante;
+        this.eventoEscolhido = eventoEscolhido;
     }
 
     // Criando Getters (Ler)!
-    public String getSenhap(){
+    public String getSenha(){
         return senhaParticipante;
     }
     
