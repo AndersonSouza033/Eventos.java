@@ -15,12 +15,15 @@ public class SistemaEventos {
     
     // Iniciando o programa!
     public static void main(String[] args) {
+        prepararParticipantesTeste(); // Chamando o método para adicionar 1 cadastro na tabela Participante para efetuar o login!
         // Criando o menu principal!
+        // ATENÇÃO MUNDANÇAS = Adicionar a opção de se cadastrar como participante!
         while (true) {
             System.out.println("\n--- Bem-vindo ao Rolézinho Eventos ---");
             System.out.println("1. Entrar como Organizador");
             System.out.println("2. Entrar como Participante");
-            System.out.println("3. Sair");
+            System.out.println("3. Cadastrar Participante");
+            System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -33,6 +36,8 @@ public class SistemaEventos {
                     if (loginParticipante()) menuParticipante();
                     break;
                 case 3:
+                    criarParticipante();
+                case 4:
                     System.exit(0);
                 default:
                     System.out.println("Opção inválida.");
@@ -48,11 +53,11 @@ public class SistemaEventos {
     public static boolean loginOrganizador(){
         System.out.println("\n--- Login Organizador ---");
         System.out.print("Usuário: ");
-        String usuario = scanner.nextLine();
+        String usuarioOrganizador = scanner.nextLine();
         System.out.print("Senha: ");
-        String senha = scanner.nextLine();
+        String senhaOrganizador = scanner.nextLine();
     
-        if (USUARIO_ORGANIZADOR.equals(usuario) && SENHA_ORGANIZADOR.equals(senha)) {
+        if (USUARIO_ORGANIZADOR.equals(usuarioOrganizador) && SENHA_ORGANIZADOR.equals(senhaOrganizador)) {
             System.out.println("Login realizado com sucesso!");
             return true;
         } else {
@@ -61,14 +66,23 @@ public class SistemaEventos {
         }
     }
 
+    // Teste de login (Método para adicionar um cadastro teste na tabela participantes)!
+    public static void prepararParticipantesTeste() {
+        participantes.add(new Participante("Anderson", "andersonsouzapcb@gmail.com", "1234","9999-9999", 20, LocalDate.of(2004, 1, 1)));
+    }   
+
     // Criando o método de login do participante!
     public static boolean loginParticipante(){
         System.out.println("\n--- Login Participante ---");
+        
         System.out.print("Digite seu e-mail: ");
-        String email = scanner.nextLine();
+        String usuarioParticipante = scanner.nextLine();
+
+        System.out.println("Digite sua senha: ");
+        String senhaParticipante = scanner.nextLine();
     
         for (Participante p : participantes) {
-            if (p.getEmail().equalsIgnoreCase(email)) {
+            if (p.getEmail().equalsIgnoreCase(usuarioParticipante) && p.getSenha().equalsIgnoreCase(senhaParticipante)) {
                 System.out.println("Login realizado com sucesso! Bem-vindo, " + p.getNome());
                 return true;
             }
@@ -110,17 +124,16 @@ public class SistemaEventos {
     private static void menuParticipante() {
         while (true) {
             System.out.println("\n--- Menu Participante ---");
-            System.out.println("1. Cadastrar como participante");
-            System.out.println("2. Ver eventos disponíveis");
-            System.out.println("3. Voltar ao menu principal");
+            //  ATENÇÃO MUNDANÇAS = Trocar para outro método de se inscrever no evento!
+            System.out.println("1. Ver eventos disponíveis");
+            System.out.println("2. Voltar ao menu principal");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcao) {
-                case 1: criarParticipante(); break;
-                case 2: listarEventos(); break;
-                case 3: return;
+                case 1: listarEventos(); break;
+                case 2: return;
                 default: System.out.println("Opção inválida.");
             }
         }
@@ -278,10 +291,5 @@ public class SistemaEventos {
     }
     public static List<Participante> getParticipantes() {
         return participantes;
-    }
-    
-    // Teste de login
-    public static void prepararParticipantesTeste() {
-        participantes.add(new Participante("João", "joao@email.com", "1234","9999-9999", 20, LocalDate.of(2004, 1, 1)));
-    }                                                                                                                            // The constructor Participantes(String ,String, String, int, LocalDate) is undefined                                                                                     
+    }                                                                        
 }
