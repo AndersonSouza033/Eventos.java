@@ -13,15 +13,23 @@ public class Participante {
   private List<Evento> eventoEscolhido;
 
   // Método construtor!
-  public Participante(String nomeParticipante, String emailParticipante, String senhaParticipante,
-    String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante, List<Evento> eventoEscolhido) {
-      this.nomeParticipante = nomeParticipante;
-      this.emailParticipante = emailParticipante;
-      this.senhaParticipante = senhaParticipante;
-      this.telefoneParticipante = telefoneParticipante;
-      this.idadeParticipante = idadeParticipante;
-      this.nascimentoParticipante = nascimentoParticipante;
-      this.eventoEscolhido = eventoEscolhido;
+  public Participante(String nomeParticipante, String emailParticipante, String senhaParticipante, String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante, List<Evento> eventoEscolhido) {
+    this.nomeParticipante = nomeParticipante;
+    this.emailParticipante = emailParticipante;
+    this.senhaParticipante = senhaParticipante;
+    this.telefoneParticipante = telefoneParticipante;
+    this.idadeParticipante = idadeParticipante;
+    this.nascimentoParticipante = nascimentoParticipante;
+    this.eventoEscolhido = eventoEscolhido;
+  }
+
+  // Método para editar participante!
+  public void editarParticipante(String nomeParticipante, String senhaParticipante, String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante){
+    this.nomeParticipante = nomeParticipante;
+    this.senhaParticipante = senhaParticipante;
+    this.telefoneParticipante = telefoneParticipante;
+    this.idadeParticipante = idadeParticipante;
+    this.nascimentoParticipante = nascimentoParticipante;
   }
 
   // Criando Getters (Ler)!
@@ -37,13 +45,30 @@ public class Participante {
     return nomeParticipante;
   }
 
+  public List<Evento> getEventosEscolhidos() {
+    return eventoEscolhido;
+  }
+
+  // Criando Setters (Alterar)!
+  public void setNome(String nome) {
+    this.nomeParticipante = nome;
+  }
+
+  public void setTelefone(String telefone) {
+    this.telefoneParticipante = telefone;
+  }
+
+  public void setSenha(String senha) {
+    this.senhaParticipante = senha;
+  }
+
   // Método para exibir os dados do participante!
   @Override
   public String toString() {
     return "Nome: " + nomeParticipante +
-      "\nE-mail: " + emailParticipante +
-      "\nTelefone: " + telefoneParticipante +
-      "\nIdade: " + idadeParticipante +
-      "\nData de Nascimento: " + nascimentoParticipante;
-    }
+    "\nE-mail: " + emailParticipante +
+    "\nTelefone: " + telefoneParticipante +
+    "\nIdade: " + idadeParticipante +
+    "\nData de Nascimento: " + nascimentoParticipante;
+  }
 }
