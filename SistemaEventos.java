@@ -108,19 +108,20 @@ public class SistemaEventos {
       System.out.println("--------------------------");
             
       System.out.println("5. Cadastrar novo cantor");
-      System.out.println(" . Visualizar lista de cantores");  // Método criado OBS: Testar
-      System.out.println(" . Editar informações de cantores"); // Método criado OBS: Testar
-      System.out.println(" . Excluir cantor"); // ATENÇÂO!! Criar o método
+      System.out.println("6. Visualizar lista de cantores");  // Método criado OBS: Testar
+      System.out.println("7. Editar informações de cantores"); // Método criado OBS: Testar
+      System.out.println("8. Excluir cantor"); // Método criado OBS: Testar
             
       System.out.println("--------------------------");
             
-      System.out.println("6. Cadastrar novo participante");
-      System.out.println(" . Visualizar lista de participantes"); // ATENÇÂO!! Criar método
+      System.out.println("9. Cadastrar novo participante");
+      System.out.println("10. Visualizar lista de participantes"); // Método criado OBS: Testar
       System.out.println(" . Editar dados de um participante"); // ATENÇÂO!! Criar método
       System.out.println(" . Inscrever participante em evento"); // ATENÇÂO!! Criar método
       System.out.println(" . Cancelar inscrição de participante"); // ATENÇÂO!! Criar método
+      System.out.println("14. Excluir participante"); // Método criado OBS: Testar
             
-      System.out.println("7. Voltar ao menu principal");
+      System.out.println("9. Voltar ao menu principal");
       System.out.print("Escolha uma opção: ");
       int opcao = scanner.nextInt();
       scanner.nextLine();
@@ -131,8 +132,11 @@ public class SistemaEventos {
         case 3: editarEvento(); break;
         case 4: cancelarEvento(); break;
         case 5: criarCantor(); break;
-        case 6: criarParticipante(); break;
-        case 7: return;
+        case 6: listarCantores(); break;
+        case 7; editarCantor(); break;
+        case 8: criarParticipante(); break;
+        case 9: listarParticipantes(); break;
+        case 10: return;
         default: System.out.println("Opção inválida.");
       }
     }
@@ -157,6 +161,50 @@ public class SistemaEventos {
       }
     }
   }
+  
+  // Método para excluir cadastro do cantor!
+  private static void excluirCantor() {
+    listarCantores(); // Mostra a lista de cantores com índices
+
+    if (cantores.isEmpty()) {
+      System.out.println("Nenhum cantor para excluir.");
+      return;
+    }
+
+    System.out.print("Informe o número do cantor a excluir: ");
+    int idx = scanner.nextInt() - 1;
+    scanner.nextLine();
+
+    if (idx < 0 || idx >= cantores.size()) {
+      System.out.println("Número inválido.");
+      return;
+    }
+    Cantor cantorRemovido = cantores.remove(idx);
+    System.out.println("Cantor \"" + cantorRemovido.getNome() + "\" removido com sucesso.");
+  }
+  
+  // Método para exclui cadastro do participante!
+  private static void excluirParticipante() {
+    listarParticipantes(); // Mostra a lista de participantes com índices
+
+    if (participantes.isEmpty()) {
+      System.out.println("Nenhum participante para excluir.");
+      return;
+    }
+
+    System.out.print("Informe o número do cantor a excluir: ");
+    int idx = scanner.nextInt() - 1;
+    scanner.nextLine();
+
+    if (idx < 0 || idx >= participantes.size()) {
+      System.out.println("Número inválido.");
+      return;
+    }
+
+    Participante participanteRemovido = participantes.remove(idx);
+    System.out.println("Participante \"" + participanteRemovido.getNome() + "\" removido com sucesso.");
+}
+
   
   // Método para editar o evento!
   private static void editarEvento() {
@@ -222,6 +270,18 @@ public class SistemaEventos {
         
     cantor.editarCantor(nomeCantor, emailCantor, idadeCantor, telefoneCantor);
     System.out.println("Cantor atualizado.");
+  }
+  
+  // Método para listar os participantes!
+  private static void listarParticipantes(){
+    if (participantes.isEmpty()){
+      System.out.println("Nenhum participante cadastrado.");
+      return;
+    }
+    for (int i = 0, i < participantes.size(), i++){
+      System.out.println("participante #"(i + 1));
+      System.out.println(participantes.get(i));
+    }
   }
   
   // Método para listar os cantores!
