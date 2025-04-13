@@ -69,6 +69,7 @@ public class Participante {
     "\nE-mail: " + emailParticipante +
     "\nTelefone: " + telefoneParticipante +
     "\nIdade: " + idadeParticipante +
-    "\nData de Nascimento: " + nascimentoParticipante;
+    "\nData de Nascimento: " + nascimentoParticipante + 
+    "---------------------------------------------------";
   }
 }

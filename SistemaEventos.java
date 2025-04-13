@@ -7,13 +7,8 @@ import java.time.format.DateTimeParseException;
 public class SistemaEventos {
   // Criando o Scanner para ler os dados!
   private static Scanner scanner = new Scanner(System.in);
-
-  // Criando as listas necessárias para armazenar os dados de cada classe!
-  private static List<Evento> eventos = new ArrayList<>();
-  private static List<Cantor> cantores = new ArrayList<>();
-  private static List<Participante> participantes = new ArrayList<>();
     
-  // Iniciando o programa!
+  // Iniciando o programa! OK Não precisa mexer
   public static void main(String[] args) {
     prepararParticipantesTeste(); // Chamando o método teste para adicionar 1 cadastro na tabela Participante para efetuar o login!
     // Criando o menu principal!
@@ -44,13 +39,18 @@ public class SistemaEventos {
     }
   }
 
-  // Dados fixos para login de organizador
+  // Dados fixos para login de organizador! OK Não precisa mexer
   private static final String USUARIO_ORGANIZADOR = "admin";
   private static final String SENHA_ORGANIZADOR = "1234";
+  
+  
   // Variável para armazenar o participante logado!
   private static Participante participanteLogado = null;
 
-  // Criando o método de login do organizador!
+
+
+
+  // Criando o método de login do organizador! (OK Não precisa mexer)
   public static boolean loginOrganizador(){
     System.out.println("\n--- Login Organizador ---");
     System.out.print("Usuário: ");
@@ -69,7 +69,7 @@ public class SistemaEventos {
     }
   }
 
-  // Criando o método de login do participante!
+  // Criando o método de login do participante!  (Precisa corrigir para usar a classe BandoDeDados!)
   public static Participante loginParticipante() {
     System.out.println("\n--- Login Participante ---");
     System.out.print("Digite seu e-mail: ");
@@ -78,12 +78,13 @@ public class SistemaEventos {
     System.out.print("Digite sua senha: ");
     String senhaParticipante = scanner.nextLine();
 
-    for (Participante p : participantes) {
+    // Usando o BancoDeDados para acessar a lista de participantes
+    for (Participante p : BancoDeDados.getParticipantes()) {
       if (p.getEmail().equalsIgnoreCase(usuarioParticipante) && p.getSenha().equals(senhaParticipante)) {
         System.out.println("Login realizado com sucesso! Bem-vindo, " + p.getNome());
         return p; // Retornando o participante logado!
       }
-   }
+    }
 
     System.out.println("E-mail ou senha incorretos.");
     return null;
@@ -91,7 +92,16 @@ public class SistemaEventos {
 
 
 
-  // Criando o método do menu do Organizador Principal!
+
+
+
+
+
+
+
+
+
+  // Criando o método do menu do Organizador Principal! (OK Não precisa mexer)
   public static void menuOrganizador() {
     while (true) {
       System.out.println("\n--- Menu Organizador ---");
@@ -113,7 +123,7 @@ public class SistemaEventos {
     }
   }
 
-  // Criando o método do menu Organizador Evento!
+  // Criando o método do menu Organizador Evento! (Ok Não precisa mexer (Acertar so os métodos dele)!)
   public static void menuEvento() {
     while (true) {
       System.out.println("\n--- Dados do Evento ---");
@@ -122,7 +132,9 @@ public class SistemaEventos {
       System.out.println("3. Editar informações de um evento");
       System.out.println("4. Cancelar evento existente");
       System.out.println("5. Excluir evento");
-      System.out.println("6. Voltar");
+      System.out.println("6. Cadastrar cantor no evento");
+      System.out.println("7. Cancelar cantor no evento"); 
+      System.out.println("8. Voltar");
       System.out.print("Escolha uma opção: ");
       int opcao = scanner.nextInt();
       scanner.nextLine();
@@ -133,13 +145,15 @@ public class SistemaEventos {
         case 3: editarEvento(); break;
         case 4: cancelarEvento(); break;
         case 5: excluirEvento(); break;
-        case 6: return;
+        case 6: cadastrarCantorEvento(); break;
+        case 7: cancelarCantorEvento(); break;
+        case 8: return;
         default: System.out.println("Opção inválida.");
       }
     }
   }
 
-  // Criando o método do menu Organizador Cantor!
+  // Criando o método do menu Organizador Cantor! (Ok Não precisa mexer (Acertar so os métodos dele)!)
   public static void menuCantor() {
     while (true) {
         System.out.println("\n--- Dados do Cantor ---");
@@ -163,7 +177,7 @@ public class SistemaEventos {
     }
   }
 
-  // Criando o método do menu Organizador Participante!
+  // Criando o método do menu Organizador Participante! (Ok Não precisa mexer (Acertar so os métodos dele)!)
   public static void menuParticipanteOrg(){
     System.out.println("--- Dados dos usuários ---");
     System.out.println("1. Cadastrar participante");
@@ -172,6 +186,7 @@ public class SistemaEventos {
     System.out.println("4. Excluir Participante");
     System.out.println("5. Inscrever participante no evento");
     System.out.println("6. Cancelar inscrição de participante no evento");
+    System.out.println("7. Voltar ao menu principal");
     int opcao = scanner.nextInt();
     scanner.nextLine();
 
@@ -182,14 +197,15 @@ public class SistemaEventos {
       case 4: excluirParticipante(); break;
       case 5: inscreverParticipanteEvento(); break;
       case 6: cancelarInscricaoParticipanteEvento(); break;
+      case 7: return;
+      default: System.out.println("Opção inválida.");
     }
   }
 
-  // Criando o menu do participante!
+  // Criando o menu do participante! (Ok Não precisa mexer (Acertar so os métodos dele)!)
   private static void menuParticipante(Participante participante) {
     while (true) {
       System.out.println("\n--- Menu Participante ---");
-      // ATENÇÃO MUDANÇAS = Adicionar o método para cancelar inscrição nos eventos!
       System.out.println("1. Ver eventos disponíveis");
       System.out.println("2. Inscrever em eventos");
       System.out.println("3. Cancelar inscrição no evento");
@@ -197,7 +213,7 @@ public class SistemaEventos {
       System.out.println("5. Voltar ao menu principal");
       System.out.print("Escolha uma opção: ");
       int opcao = scanner.nextInt();
-      scanner.nextLine();
+      scanner.nextLine(); // Limpa buffer!
 
       switch (opcao) {
         case 1: listarEventos(); break;
@@ -210,7 +226,131 @@ public class SistemaEventos {
     }
   }
 
-  // Método para o participante logado cancelar inscrição em eventos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Criando o método para retirar cantor do evento! (Corrigido)
+  private static void cancelarCantorEvento() {
+    List<Evento> eventos = BancoDeDados.getEventos(); // agora usando BancoDeDados
+
+    if (eventos.isEmpty()) {
+      System.out.println("Nenhum evento cadastrado.");
+      return;
+    }
+
+    listarEventos(); // Supondo que esse método também use BancoDeDados.getEventos()
+    System.out.print("Digite o número do evento para remover cantor(es): ");
+    int indiceEvento = scanner.nextInt() - 1;
+    scanner.nextLine();
+
+    if (indiceEvento < 0 || indiceEvento >= eventos.size()) {
+        System.out.println("Evento inválido.");
+        return;
+    }
+
+    Evento evento = eventos.get(indiceEvento);
+    List<Cantor> cantoresNoEvento = evento.getCantoresEscolhidos();
+
+    if (cantoresNoEvento.isEmpty()) {
+        System.out.println("Não há cantores vinculados a este evento.");
+        return;
+    }
+
+    String resposta = "sim";
+    while (resposta.equalsIgnoreCase("sim") && !cantoresNoEvento.isEmpty()) {
+      System.out.println("Cantores vinculados ao evento:");
+      for (int i = 0; i < cantoresNoEvento.size(); i++) {
+        System.out.println((i + 1) + ". " + cantoresNoEvento.get(i).getNome());
+      }
+
+      System.out.print("Digite o número do cantor que deseja remover: ");
+      int escolha = scanner.nextInt() - 1;
+      scanner.nextLine();
+
+      if (escolha < 0 || escolha >= cantoresNoEvento.size()) {
+        System.out.println("Escolha inválida.");
+      } else {
+        Cantor cantorRemovido = cantoresNoEvento.remove(escolha);
+        System.out.println("Cantor \"" + cantorRemovido.getNome() + "\" removido do evento \"" + evento.getNome() + "\" com sucesso.");
+      }
+
+      if (!cantoresNoEvento.isEmpty()) {
+        System.out.print("Deseja remover outro cantor deste evento? (SIM/NAO): ");
+        resposta = scanner.nextLine();
+      } else {
+        System.out.println("Este evento não possui mais cantores vinculados.");
+        break;
+      }
+    }
+  }
+
+  // Criando o método para adicionar o cantor no evento! (Corrigido)
+  private static void cadastrarCantorEvento() {
+    List<Evento> eventos = BancoDeDados.getEventos();    // Agora usando BancoDeDados
+    List<Cantor> cantores = BancoDeDados.getCantores();  // Agora usando BancoDeDados
+
+    if (eventos.isEmpty()) {
+      System.out.println("Nenhum evento cadastrado.");
+      return;
+    }
+
+    listarEventos(); // Supondo que este método também utilize BancoDeDados.getEventos()
+    System.out.print("Digite o número do evento onde deseja adicionar cantor(es): ");
+    int indiceEvento = scanner.nextInt() - 1;
+    scanner.nextLine();
+
+    if (indiceEvento < 0 || indiceEvento >= eventos.size()) {
+      System.out.println("Evento inválido.");
+      return;
+    }
+
+    Evento evento = eventos.get(indiceEvento);
+
+    if (cantores.isEmpty()) {
+      System.out.println("Nenhum cantor disponível para adicionar.");
+      return;
+    }
+
+    String resposta = "sim";
+    while (resposta.equalsIgnoreCase("sim")) {
+      listarCantores(); // Supondo que este método também utilize BancoDeDados.getCantores()
+      System.out.print("Digite o número do cantor para adicionar ao evento: ");
+      int indiceCantor = scanner.nextInt() - 1;
+      scanner.nextLine();
+
+      if (indiceCantor < 0 || indiceCantor >= cantores.size()) {
+        System.out.println("Cantor inválido.");
+      } else {
+        Cantor cantor = cantores.get(indiceCantor);
+        if (evento.getCantoresEscolhidos().contains(cantor)) {
+          System.out.println("Esse cantor já está vinculado ao evento.");
+        } else {
+          evento.getCantoresEscolhidos().add(cantor);
+          System.out.println("Cantor \"" + cantor.getNome() + "\" adicionado ao evento \"" + evento.getNome() + "\" com sucesso!");
+        }
+      }
+
+      System.out.print("Deseja adicionar outro cantor ao evento? (SIM/NAO): ");
+      resposta = scanner.nextLine();
+    }
+  }
+  
+  // Método para o participante logado cancelar inscrição em eventos (Corrigido)
   private static void cancelarMinhaInscricao(Participante participante) {
     System.out.println("\n--- Cancelar Inscrição em Evento ---");
 
@@ -236,10 +376,10 @@ public class SistemaEventos {
         System.out.println("Número inválido.");
       } else {
         Evento eventoCancelado = eventosInscritos.remove(idx);
+
         System.out.println("Inscrição no evento \"" + eventoCancelado.getNome() + "\" cancelada com sucesso!");
       }
 
-      // Se ainda houver eventos, perguntar se deseja cancelar mais
       if (!eventosInscritos.isEmpty()) {
         System.out.print("Deseja cancelar a inscrição em outro evento? (SIM/NAO): ");
         resposta = scanner.nextLine();
@@ -249,16 +389,18 @@ public class SistemaEventos {
       }
     }
   }
- 
-  // Método para inscrever o participante logado em eventos!
+
+  // Método para inscrever o participante logado em eventos! (Corrigido)
   private static void inscreverEvento(Participante participante) {
     System.out.println("\n--- Inscrição em Eventos ---");
+
+    List<Evento> eventos = BancoDeDados.getEventos(); // ✅ Usando BancoDeDados
 
     if (eventos.isEmpty()) {
       System.out.println("Nenhum evento disponível no momento.");
       return;
     }
-
+    
     String resposta = "sim";
     while (resposta.equalsIgnoreCase("sim")) {
       System.out.println("\nEventos disponíveis:");
@@ -272,31 +414,34 @@ public class SistemaEventos {
 
       if (escolha < 1 || escolha > eventos.size()) {
         System.out.println("Evento inválido.");
-      } 
-      else {
+      } else {
         Evento eventoSelecionado = eventos.get(escolha - 1);
+        if (participante.getEventosEscolhidos().contains(eventoSelecionado)) {
+          System.out.println("Você já está inscrito neste evento.");
+        } else {
+          participante.getEventosEscolhidos().add(eventoSelecionado);
+        }
 
-      if (participante.getEventosEscolhidos().contains(eventoSelecionado)) {
-        System.out.println("Você já está inscrito neste evento.");
-      } 
-      else {
-        participante.getEventosEscolhidos().add(eventoSelecionado);
-        System.out.println("Inscrição no evento \"" + eventoSelecionado.getNome() + "\" realizada com sucesso!");
-      }}
-
-      System.out.print("Deseja se inscrever em outro evento? (SIM/NAO): ");
-      resposta = scanner.nextLine();
+      System.out.println("Inscrição no evento \"" + eventoSelecionado.getNome() + "\" realizada com sucesso!");
+      }
     }
-  }   
+
+    System.out.print("Deseja se inscrever em outro evento? (SIM/NAO): ");
+    resposta = scanner.nextLine();
+  }
   
-  // Método exclusivo para o ORGANIZADOR inscrever um participante em eventos
+  // Método exclusivo para o ORGANIZADOR inscrever um participante em eventos (Corrigido)
   private static void inscreverParticipanteEvento() {
+    List<Participante> participantes = BancoDeDados.getParticipantes(); // ✅ via BancoDeDados
+    List<Evento> eventos = BancoDeDados.getEventos(); // ✅ via BancoDeDados
+
     if (participantes.isEmpty()) {
       System.out.println("Nenhum participante cadastrado.");
       return;
     }
 
-    listarParticipantes(); // Mostra todos os participantes
+    listarParticipantes(); // Certifique-se que esse método usa BancoDeDados também
+
     System.out.print("Digite o número do participante a ser inscrito: ");
     int indiceParticipante = scanner.nextInt() - 1;
     scanner.nextLine(); // limpa buffer
@@ -315,37 +460,41 @@ public class SistemaEventos {
 
     String resposta = "sim";
     while (resposta.equalsIgnoreCase("sim")) {
-      listarEventos();
+      listarEventos(); // Certifique-se que esse método também usa BancoDeDados
+
       System.out.print("Digite o número do evento para inscrever o participante: ");
       int escolhaEvento = scanner.nextInt();
       scanner.nextLine();
 
       if (escolhaEvento < 1 || escolhaEvento > eventos.size()) {
         System.out.println("Evento inválido.");
-      } else {
-        Evento eventoSelecionado = eventos.get(escolhaEvento - 1);
-
-        if (participante.getEventosEscolhidos().contains(eventoSelecionado)) {
-          System.out.println("O participante já está inscrito neste evento.");
         } else {
-          participante.getEventosEscolhidos().add(eventoSelecionado);
-          System.out.println("Participante \"" + participante.getNome() + "\" inscrito com sucesso no evento \"" + eventoSelecionado.getNome() + "\"!");
+          Evento eventoSelecionado = eventos.get(escolhaEvento - 1);
+
+          if (participante.getEventosEscolhidos().contains(eventoSelecionado)) {
+            System.out.println("O participante já está inscrito neste evento.");
+          } else {
+            participante.getEventosEscolhidos().add(eventoSelecionado);
+            System.out.println("Participante \"" + participante.getNome() + 
+            "\" inscrito com sucesso no evento \"" + eventoSelecionado.getNome() + "\"!");
+          }
         }
-      }
 
       System.out.print("Deseja inscrever o participante em outro evento? (SIM/NAO): ");
       resposta = scanner.nextLine();
     }
   }
 
-  // Método exclusivo para o ORGANIZADOR cancelar a inscrição de um participante em eventos
+  // Método exclusivo para o ORGANIZADOR cancelar a inscrição de um participante em eventos (Corrigdo)
   private static void cancelarInscricaoParticipanteEvento() {
+    List<Participante> participantes = BancoDeDados.getParticipantes(); // ✅ pegando os participantes pelo BancoDeDados
+
     if (participantes.isEmpty()) {
       System.out.println("Nenhum participante cadastrado.");
       return;
     }
 
-    listarParticipantes();
+    listarParticipantes(); // Certifique-se que também usa BancoDeDados internamente
     System.out.print("Digite o número do participante para cancelar inscrição: ");
     int indiceParticipante = scanner.nextInt() - 1;
     scanner.nextLine(); // limpa buffer
@@ -391,9 +540,11 @@ public class SistemaEventos {
     }
   }
 
-  // Método para excluir cadastro do cantor!
+  // Método para excluir cadastro do cantor! (Corrigido)
   private static void excluirCantor() {
-    listarCantores(); // Mostra a lista de cantores com índices
+    List<Cantor> cantores = BancoDeDados.getCantores(); // ✅ Usando BancoDeDados
+
+    listarCantores(); // Supondo que também usa BancoDeDados internamente
 
     if (cantores.isEmpty()) {
       System.out.println("Nenhum cantor para excluir.");
@@ -402,26 +553,29 @@ public class SistemaEventos {
 
     System.out.print("Informe o número do cantor a excluir: ");
     int idx = scanner.nextInt() - 1;
-    scanner.nextLine();
+    scanner.nextLine(); // Limpa buffer
 
     if (idx < 0 || idx >= cantores.size()) {
       System.out.println("Número inválido.");
       return;
     }
+
     Cantor cantorRemovido = cantores.remove(idx);
     System.out.println("Cantor \"" + cantorRemovido.getNome() + "\" removido com sucesso.");
   }
-  
-  // Método para excluir cadastro do participante!
+
+  // Método para excluir cadastro do participante! (Corrigido)
   private static void excluirParticipante() {
-    listarParticipantes(); // Mostra a lista de participantes com índices
+    List<Participante> participantes = BancoDeDados.getParticipantes(); // Usando o BancoDeDados
+
+    listarParticipantes(); // Supondo que este método também use BancoDeDados.getParticipantes()
 
     if (participantes.isEmpty()) {
       System.out.println("Nenhum participante para excluir.");
       return;
     }
 
-    System.out.print("Informe o número do cantor a excluir: ");
+    System.out.print("Informe o número do participante a excluir: ");
     int idx = scanner.nextInt() - 1;
     scanner.nextLine(); // Limpa buffer!
 
@@ -434,27 +588,31 @@ public class SistemaEventos {
     System.out.println("Participante \"" + participanteRemovido.getNome() + "\" removido com sucesso.");
   }
 
-  // Método para exluir cadastro do evento!
-  public static void excluirEvento(){
-    listarEventos();
+  // Método para exluir cadastro do evento! (Corrigido)
+  public static void excluirEvento() {
+    List<Evento> eventos = BancoDeDados.getEventos(); // ✅ Usando BancoDeDados
+
+    listarEventos(); // Supondo que usa BancoDeDados.getEventos() também
 
     if (eventos.isEmpty()) {
       System.out.println("Nenhum evento para excluir.");
+      return;
     }
 
-    System.out.println("Informe o número do evento para excluir ");
+    System.out.print("Informe o número do evento para excluir: ");
     int idx = scanner.nextInt() - 1;
     scanner.nextLine(); // Limpa buffer!
 
     if (idx < 0 || idx >= eventos.size()) {
       System.out.println("Número inválido.");
+      return;
     }
 
-    Evento eventoRemovido  = eventos.remove(idx);
+    Evento eventoRemovido = eventos.remove(idx);
     System.out.println("Evento \"" + eventoRemovido.getNome() + "\" removido com sucesso.");
   }
 
-  // Método para editar apenas os dados do participante logado!
+  // Método para editar apenas os dados do participante logado! (Corrigido)
   private static void editarMeusDados(Participante participante) {
     System.out.println("\n--- Editar Meus Dados ---");
 
@@ -473,12 +631,21 @@ public class SistemaEventos {
     System.out.println("Dados atualizados com sucesso!");
   }  
 
-  // Método para editar o participante!
-  private static void editarParticipante(){
-    listarParticipantes();
-    System.out.println("Informe o código do participante a editar:");
-    int idx = scanner.nextInt() - 1 ;
+  // Método para editar o participante! (Corrigido)
+  private static void editarParticipante() {
+    List<Participante> participantes = BancoDeDados.getParticipantes(); // ✅ Usando BancoDeDados
+
+    listarParticipantes(); // Supondo que também usa BancoDeDados internamente
+
+    if (participantes.isEmpty()) {
+      System.out.println("Nenhum participante cadastrado.");
+      return;
+    }
+
+    System.out.println("Informe o número do participante a editar:");
+    int idx = scanner.nextInt() - 1;
     scanner.nextLine(); // Limpa buffer!
+
     if (idx < 0 || idx >= participantes.size()) {
       System.out.println("Participante inválido.");
       return;
@@ -486,16 +653,16 @@ public class SistemaEventos {
 
     Participante participante = participantes.get(idx);
 
-    System.out.println("Novo nome: ");
-    String nomeParticipante  = scanner.nextLine();
+    System.out.print("Novo nome: ");
+    String nomeParticipante = scanner.nextLine();
 
-    System.out.println("Nova senha: ");
-    String senhaParticipante  = scanner.nextLine();
+    System.out.print("Nova senha: ");
+    String senhaParticipante = scanner.nextLine();
 
-    System.out.println("Novo telefone: ");
+    System.out.print("Novo telefone: ");
     String telefoneParticipante = scanner.nextLine();
 
-    System.out.println("Nova idade: ");
+    System.out.print("Nova idade: ");
     int idadeParticipante = scanner.nextInt();
     scanner.nextLine(); // Limpa buffer!
 
@@ -506,23 +673,32 @@ public class SistemaEventos {
     try {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
       nascimentoParticipante = LocalDate.parse(dataTexto, formatter);
-    } 
-    catch (DateTimeParseException e) {
+    } catch (DateTimeParseException e) {
       System.out.println("Data inválida. Use o formato dd/mm/aaaa.");
       return;
     }
 
-    // Salva as atualizações a tabela!
+    // Aplica as alterações ao participante selecionado
     participante.editarParticipante(nomeParticipante, senhaParticipante, telefoneParticipante, idadeParticipante, nascimentoParticipante);
-    System.out.println("Participante atualizado");
+
+    System.out.println("Participante atualizado com sucesso.");
   }
 
-  // Método para editar o evento!
+  // Método para editar o evento! (Corrigido)
   private static void editarEvento() {
-    listarEventos();
-    System.out.print("Informe o código do evento a editar: ");
+    List<Evento> eventos = BancoDeDados.getEventos(); // ✅ Usando BancoDeDados
+
+    listarEventos(); // Supondo que também usa BancoDeDados internamente
+
+    if (eventos.isEmpty()) {
+      System.out.println("Nenhum evento cadastrado.");
+      return;
+    }
+
+    System.out.print("Informe o número do evento a editar: ");
     int idx = scanner.nextInt() - 1;
     scanner.nextLine();
+
     if (idx < 0 || idx >= eventos.size()) {
       System.out.println("Evento inválido.");
       return;
@@ -532,7 +708,7 @@ public class SistemaEventos {
 
     System.out.print("Novo nome: ");
     String nomeEvento = scanner.nextLine();
-        
+
     System.out.print("Novo código: ");
     String codigoEvento = scanner.nextLine();
 
@@ -548,93 +724,119 @@ public class SistemaEventos {
     System.out.print("Nova capacidade: ");
     int capacidadeEvento = scanner.nextInt();
     scanner.nextLine();
-        
-    // Salva as atualizações a tabela!
+
+    // Aplica as alterações ao evento selecionado
     evento.editarEvento(nomeEvento, codigoEvento, descricaoEvento, dataEvento, localEvento, capacidadeEvento);
-    System.out.println("Evento atualizado.");
+
+    System.out.println("Evento atualizado com sucesso.");
   }
 
-  // Método para editar o cantor!
-  public static void editarCantor(){
-    listarCantores();
-    System.out.print("Informe o código do cantor a editar: ");
-    int idx = scanner.nextInt() - 1;
-    scanner.nextLine();
-    if (idx < 0 || idx >= eventos.size()) {
-      System.out.println("Cantor inválido.");
-      return;
-    }
-        
-    Cantor cantor = cantores.get(idx);
-        
-    System.out.println("Novo nome: ");
-    String nomeCantor = scanner.nextLine();
-        
-    System.out.println("Novo e-mail: ");
-    String emailCantor = scanner.nextLine();
-        
-    System.out.println("Nova idade: ");
-    int idadeCantor = scanner.nextInt();
-    scanner.nextLine(); // Limpa buffer!
-        
-    System.out.println("Novo telefone: ");
-    String telefoneCantor = scanner.nextLine();
-        
-    cantor.editarCantor(nomeCantor, emailCantor, idadeCantor, telefoneCantor);
-    System.out.println("Cantor atualizado.");
-  }
+  // Método para editar o cantor! (Corrigido)
+  public static void editarCantor() {
+    List<Cantor> cantores = BancoDeDados.getCantores(); // ✅ Obtendo cantores do BancoDeDados
 
-  // Método para listar os participantes!
-  private static void listarParticipantes(){
-    if (participantes.isEmpty()){
-      System.out.println("Nenhum participante cadastrado.");
-      return;
-    }
-    for (int i = 0; i < participantes.size(); i++){
-      System.out.println("participante #" + (i + 1));
-      System.out.println(participantes.get(i));
-    }
-  }
- 
-  // Método para listar os cantores!
-  private static void listarCantores(){
-    if (cantores.isEmpty()){
+    listarCantores(); // Supondo que já usa BancoDeDados internamente
+
+    if (cantores.isEmpty()) {
       System.out.println("Nenhum cantor cadastrado.");
       return;
     }
-    for (int i = 0; i < cantores.size(); i++){
-      System.out.println("Cantor #" + (i + 1));
-      System.out.println(cantores.get(i));
+
+    System.out.print("Informe o número do cantor a editar: ");
+    int idx = scanner.nextInt() - 1;
+    scanner.nextLine();
+
+    if (idx < 0 || idx >= cantores.size()) {
+      System.out.println("Cantor inválido.");
+      return;
+    }
+
+    Cantor cantor = cantores.get(idx);
+
+    System.out.println("Novo nome: ");
+    String nomeCantor = scanner.nextLine();
+
+    System.out.println("Novo e-mail: ");
+    String emailCantor = scanner.nextLine();
+
+    System.out.println("Nova idade: ");
+    int idadeCantor = scanner.nextInt();
+    scanner.nextLine(); // Limpa buffer
+
+    System.out.println("Novo telefone: ");
+    String telefoneCantor = scanner.nextLine();
+
+    // Atualiza os dados do cantor
+    cantor.editarCantor(nomeCantor, emailCantor, idadeCantor, telefoneCantor);
+
+    System.out.println("Cantor atualizado com sucesso.");
+}
+
+  // Método para listar os participantes! (Corrigido)
+  private static void listarParticipantes() {
+    List<Participante> participantes = BancoDeDados.getParticipantes(); // ✅ Obtendo participantes do BancoDeDados
+
+    if (participantes.isEmpty()) {
+      System.out.println("Nenhum participante cadastrado.");
+      return;
+    }
+
+    for (int i = 0; i < participantes.size(); i++) {
+      System.out.println("Participante #" + (i + 1));
+      System.out.println(participantes.get(i)); // Supondo que Participante tem toString()
     }
   }
-  
-  // Método para listar os eventos!
+
+  // Método para listar os cantores! (Corrigido)
+  private static void listarCantores() {
+    List<Cantor> cantores = BancoDeDados.getCantores(); // ✅ Obtendo lista do BancoDeDados
+
+    if (cantores.isEmpty()) {
+      System.out.println("Nenhum cantor cadastrado.");
+      return;
+    }
+
+    for (int i = 0; i < cantores.size(); i++) {
+      System.out.println("Cantor #" + (i + 1));
+      System.out.println(cantores.get(i)); // Supondo que Cantor tem toString()
+    }
+}
+
+  // Método para listar os eventos! (Corrigido)
   private static void listarEventos() {
+    List<Evento> eventos = BancoDeDados.getEventos(); // ✅ Usando a lista centralizada do BancoDeDados
+
     if (eventos.isEmpty()) {
       System.out.println("Nenhum evento cadastrado.");
       return;
     }
+
     for (int i = 0; i < eventos.size(); i++) {
       System.out.println("Evento #" + (i + 1));
-      System.out.println(eventos.get(i));
+      System.out.println(eventos.get(i)); // Supondo que Evento sobrescreve toString()
     }
-  }
+}
     
-  // Método para escolher o evento a ser cancelado!
+  // Método para escolher o evento a ser cancelado! (Corrigido)
   private static void cancelarEvento() {
-    listarEventos();
+    List<Evento> eventos = BancoDeDados.getEventos(); // ✅ Utilizando a lista centralizada
+
+    listarEventos(); // Já usa BancoDeDados internamente
+
     System.out.print("Informe o número do evento a cancelar: ");
     int idx = scanner.nextInt() - 1;
-    scanner.nextLine(); // Limpa Buffer!
+    scanner.nextLine(); // Limpa buffer
+
     if (idx < 0 || idx >= eventos.size()) {
       System.out.println("Evento inválido.");
       return;
     }
-    eventos.get(idx).cancelarEvento(); // Método para cancelar o evento feito na classe Evento!
+
+    eventos.get(idx).cancelarEvento(); // ✅ Cancela o evento usando método da classe Evento
     System.out.println("Evento cancelado.");
   }
     
-  // Método para criar o evento!
+  // Método para criar o evento! (Corrigido)
   private static void criarEvento() {
     System.out.print("Nome: ");
     String nomeEvento = scanner.nextLine();
@@ -656,14 +858,52 @@ public class SistemaEventos {
     scanner.nextLine(); // Limpa buffer!
 
     boolean ativoEvento = true;
-        
-    // Adicionando o evento a tabela de Eventos!
-    Evento evento = new Evento(nomeEvento, codigoEvento, descricaoEvento, dataEvento, localEvento, capacidadeEvento, ativoEvento);
-    eventos.add(evento);
+    List<Cantor> cantoresSelecionados = new ArrayList<>();
+
+    System.out.println("Deseja adicionar um cantor a esse evento? (SIM/NAO)");
+    String resposta = scanner.nextLine();
+
+    List<Cantor> cantores = BancoDeDados.getCantores(); // ✅ Obtendo cantores do BancoDeDados
+
+    while (resposta.equalsIgnoreCase("sim")) {
+      if (cantores.isEmpty()) {
+        System.out.println("Nenhum cantor cadastrado no sistema.");
+        break;
+      }
+
+      System.out.println("\nCantores disponíveis:");
+      for (int i = 0; i < cantores.size(); i++) {
+        System.out.println((i + 1) + ". " + cantores.get(i).getNome());
+      }
+
+      System.out.print("Digite o número do cantor que deseja adicionar: ");
+      int escolhaCantor = scanner.nextInt();
+      scanner.nextLine(); // Limpa buffer!
+
+      if (escolhaCantor < 1 || escolhaCantor > cantores.size()) {
+        System.out.println("Cantor inválido.");
+      } else {
+        Cantor cantor = cantores.get(escolhaCantor - 1);
+        if (cantoresSelecionados.contains(cantor)) {
+          System.out.println("Você já adicionou esse cantor.");
+        } else {
+          cantoresSelecionados.add(cantor);
+          System.out.println("Cantor adicionado ao evento com sucesso!");
+        }
+      }
+
+      System.out.print("Deseja adicionar outro cantor? (SIM/NAO): ");
+      resposta = scanner.nextLine();
+    }
+
+    // Criando e adicionando o evento à lista de eventos do BancoDeDados
+    Evento evento = new Evento(nomeEvento, codigoEvento, descricaoEvento, dataEvento, localEvento, capacidadeEvento, ativoEvento, cantoresSelecionados);
+
+    BancoDeDados.getEventos().add(evento); // ✅ Adicionando no BancoDeDados
     System.out.println("Evento criado com sucesso!");
   }
-    
-  // Método para criar cantor!
+  
+  // Método para criar cantor! (Corrigido)
   private static void criarCantor() {
     System.out.println("Preencha os dados do cantor ou banda!");
 
@@ -680,15 +920,14 @@ public class SistemaEventos {
     System.out.print("Telefone: ");
     String telefoneCantor = scanner.nextLine();
 
-    boolean ativoCantor = true;
-        
-    // Adicionando cantor a tabela cantores!
-    Cantor cantor = new Cantor(nomeCantor, emailCantor, idadeCantor, telefoneCantor, ativoCantor);
-    cantores.add(cantor);
+    // Criando cantor e adicionando na lista centralizada do BancoDeDados
+    Cantor cantor = new Cantor(nomeCantor, emailCantor, idadeCantor, telefoneCantor);
+    BancoDeDados.getCantores().add(cantor); // ✅ Adicionando ao BancoDeDados
+
     System.out.println("Cantor criado com sucesso!");
   }
     
-  // Método para criar o participante!
+  // Método para criar o participante! (Corrigido)
   private static void criarParticipante() {
     System.out.println("Preencha os dados do participante!");
 
@@ -728,19 +967,19 @@ public class SistemaEventos {
 
     while (resposta.equalsIgnoreCase("sim")) {
       System.out.println("\nEventos disponíveis:");
-      for (int i = 0; i < eventos.size(); i++) {
-        System.out.println((i + 1) + ". " + eventos.get(i).getNome());
+      for (int i = 0; i < BancoDeDados.getEventos().size(); i++) {  // Usando BancoDeDados.getEventos()
+        System.out.println((i + 1) + ". " + BancoDeDados.getEventos().get(i).getNome());
       }
 
       System.out.print("Digite o número do evento para se inscrever: ");
       int escolhaEvento = scanner.nextInt();
       scanner.nextLine(); // Limpa Buffer! 
 
-      if (escolhaEvento < 1 || escolhaEvento > eventos.size()) {
+      if (escolhaEvento < 1 || escolhaEvento > BancoDeDados.getEventos().size()) {
         System.out.println("Evento inválido.");
       } 
       else {
-        Evento evento = eventos.get(escolhaEvento - 1);
+        Evento evento = BancoDeDados.getEventos().get(escolhaEvento - 1);  // Usando BancoDeDados.getEventos()
         if (eventosEscolhidos.contains(evento)) {
           System.out.println("Você já se inscreveu neste evento.");
         } 
@@ -753,15 +992,17 @@ public class SistemaEventos {
       System.out.println("Deseja se inscrever em outro evento? (SIM/NAO)");
       resposta = scanner.nextLine();
     }
-  
-  // Adicionando o participante a tabela de participantes!
-  Participante participante = new Participante(nomeParticipante, emailParticipante, senhaParticipante, telefoneParticipante, idadeParticipante, nascimentoParticipante, eventosEscolhidos);
-  participantes.add(participante);
-  System.out.println("Participante cadastrado com sucesso!");
-  }                                                                      
 
-  // Teste de login (Método para adicionar um cadastro teste na tabela participantes)!
+    // Adicionando o participante ao BancoDeDados
+    Participante participante = new Participante(nomeParticipante, emailParticipante, senhaParticipante, telefoneParticipante, idadeParticipante, nascimentoParticipante, eventosEscolhidos);
+    BancoDeDados.getParticipantes().add(participante); // Usando BancoDeDados.getParticipantes()
+
+    System.out.println("Participante cadastrado com sucesso!");
+  }
+                                                                
+  // Teste de login (Método para adicionar um cadastro teste na tabela participantes)! (Corrigido)
   public static void prepararParticipantesTeste() {
-    participantes.add(new Participante("Anderson Souza", "andersonsouzapcb@gmail.com", "1234","9999-9999", 20, LocalDate.of(2004, 1, 1), new ArrayList<Evento>()));
-  }  
+    Participante participanteTeste = new Participante("Anderson Souza", "andersonsouzapcb@gmail.com", "1234", "9999-9999", 20, LocalDate.of(2004, 1, 1), new ArrayList<Evento>());
+    BancoDeDados.getParticipantes().add(participanteTeste);  // Adicionando o participante ao BancoDeDados
+}
 }
