@@ -1,4 +1,5 @@
 // Importando as bibliotecas necessárias!
+import java.util.ArrayList;
 import java.util.List;
 
 // Definindo meus atributos da classe dos eventos!
@@ -11,9 +12,10 @@ public class Evento {
   private int capacidadeEvento;
   private boolean ativoEvento;
   private List<Cantor> cantorEscolhido;
+  private List<Participante> participantes = new ArrayList<>();
 
   // Criando método construtor!
-  public Evento(String nomeEvento, String codigoEvento, String descricaoEvento, String dataEvento, String localEvento, int capacidadeEvento, boolean ativoEvento, List<Cantor> cantorEscolhido){
+  public Evento(String nomeEvento, String codigoEvento, String descricaoEvento, String dataEvento, String localEvento, int capacidadeEvento, boolean ativoEvento, List<Cantor> cantorEscolhido, List<Participante> panticipantes){
     this.nomeEvento = nomeEvento;
     this.codigoEvento = codigoEvento;
     this.descricaoEvento = descricaoEvento;
@@ -22,6 +24,12 @@ public class Evento {
     this.capacidadeEvento = capacidadeEvento;
     this.ativoEvento = ativoEvento;
     this.cantorEscolhido = cantorEscolhido;
+    this.participantes = new ArrayList<>();
+  }
+
+  public Evento(String nomeEvento2, String codigoEvento2, String descricaoEvento2, String dataEvento2,
+      String localEvento2, int capacidadeEvento2, boolean ativoEvento2, List<Cantor> cantoresSelecionados) {
+    //TODO Auto-generated constructor stub
   }
 
   // Criando Getters (Ler)!
@@ -65,4 +73,14 @@ public class Evento {
       "\nStatus; " + cantorEscolhido +
       "------------------------------------------";
     }
+
+  public void adicionarParticipante(Participante participante) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'adicionarParticipante'");
+  }
+
+  public boolean removerParticipante(Participante participante) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'removerParticipante'");
+  }
 }

@@ -23,6 +23,10 @@ public class Participante {
     this.eventoEscolhido = eventoEscolhido;
   }
 
+  public Participante(String nome, String email, String senha) {
+    //TODO Auto-generated constructor stub
+  }
+
   // Método para editar participante!
   public void editarParticipante(String nomeParticipante, String senhaParticipante, String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante){
     this.nomeParticipante = nomeParticipante;

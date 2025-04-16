@@ -45,6 +45,8 @@ public class BancoDeDados {
         }
         return null;
     }
-    
 
+    public boolean removerParticipante(Participante p) {
+        return participantes.remove(p);
+    }
 }
