@@ -38,19 +38,16 @@ public class MenuParticipante extends JFrame {
 
         add(painel);
     }
-
     private void listarEventos() {
         List<Evento> eventos = BancoDeDados.getEventos();
         if (eventos.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Não há eventos disponíveis.");
             return;
         }
-
         StringBuilder eventosStr = new StringBuilder("Eventos disponíveis:\n");
         for (Evento evento : eventos) {
             eventosStr.append(evento.getNome()).append("\n");
         }
-
         JOptionPane.showMessageDialog(this, eventosStr.toString());
     }
 
@@ -64,7 +61,6 @@ public class MenuParticipante extends JFrame {
                 break;
             }
         }
-
         if (eventoEscolhido != null) {
             eventoEscolhido.adicionarParticipante(participante);
             JOptionPane.showMessageDialog(this, "Você foi inscrito no evento: " + eventoEscolhido.getNome());
@@ -83,7 +79,6 @@ public class MenuParticipante extends JFrame {
                 break;
             }
         }
-
         if (eventoEscolhido != null && eventoEscolhido.removerParticipante(participante)) {
             JOptionPane.showMessageDialog(this, "Você foi removido do evento: " + eventoEscolhido.getNome());
         } else {
@@ -100,7 +95,6 @@ public class MenuParticipante extends JFrame {
             JOptionPane.showMessageDialog(this, "Nome inválido.");
         }
     }
-
     private void voltarMenuPrincipal() {
         new TelaInicial().setVisible(true);
         dispose();
