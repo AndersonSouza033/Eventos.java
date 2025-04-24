@@ -1,7 +1,6 @@
 // Importando as bibliotecas necessárias!
 import java.time.LocalDate;
 import java.util.List;
-
 // Definindo meus atributos da classe dos participantes!
 public class Participante {
   private String nomeParticipante;
@@ -11,7 +10,6 @@ public class Participante {
   private int idadeParticipante;
   private LocalDate nascimentoParticipante;
   private List<Evento> eventoEscolhido;
-
   // Método construtor!
   public Participante(String nomeParticipante, String emailParticipante, String senhaParticipante, String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante, List<Evento> eventoEscolhido) {
     this.nomeParticipante = nomeParticipante;
@@ -22,11 +20,9 @@ public class Participante {
     this.nascimentoParticipante = nascimentoParticipante;
     this.eventoEscolhido = eventoEscolhido;
   }
-
   public Participante(String nome, String email, String senha) {
     //TODO Auto-generated constructor stub
   }
-
   // Método para editar participante!
   public void editarParticipante(String nomeParticipante, String senhaParticipante, String telefoneParticipante, int idadeParticipante, LocalDate nascimentoParticipante){
     this.nomeParticipante = nomeParticipante;
@@ -40,32 +36,25 @@ public class Participante {
   public String getSenha(){
     return senhaParticipante;
   }
-    
   public String getEmail() {
     return emailParticipante;
   }
-
   public String getNome() {
     return nomeParticipante;
   }
-
   public List<Evento> getEventosEscolhidos() {
     return eventoEscolhido;
   }
-
   // Criando Setters (Alterar)!
   public void setNome(String nome) {
     this.nomeParticipante = nome;
   }
-
   public void setTelefone(String telefone) {
     this.telefoneParticipante = telefone;
   }
-
   public void setSenha(String senha) {
     this.senhaParticipante = senha;
   }
-
   // Método para exibir os dados do participante!
   @Override
   public String toString() {
