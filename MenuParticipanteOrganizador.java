@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class MenuParticipanteOrganizador extends JFrame {
-
     public MenuParticipanteOrganizador() {
         setTitle("Menu - Dados do Participante");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -21,25 +20,20 @@ public class MenuParticipanteOrganizador extends JFrame {
         btnCadastrarParticipante.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(this, "Função para cadastrar participante");
         });
-
         btnListarParticipantes.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(this, "Função para listar participantes");
         });
-
         btnExcluirParticipante.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(this, "Função para excluir participante");
         });
-
         btnVoltar.addActionListener((ActionEvent e) -> {
             new MenuOrganizador().setVisible(true);
             dispose();
         });
-
         painel.add(btnCadastrarParticipante);
         painel.add(btnListarParticipantes);
         painel.add(btnExcluirParticipante);
         painel.add(btnVoltar);
-
         add(painel);
     }
 }
